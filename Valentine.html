@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+            flex-direction: column;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        h1 {
+            color: #d63384;
+        }
+        .buttons {
+            margin: 20px 0;
+            position: relative;
+            height: 50px;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: 0.3s ease;
+            position: absolute;
+        }
+        .yes-button {
+            background-color: #28a745;
+            color: white;
+            position: static;
+        }
+        .no-button {
+            background-color: #dc3545;
+            color: white;
+            left: 100px;
+        }
+        .gif_container {
+            margin-top: 20px;
+        }
+        .message {
+            font-size: 18px;
+            color: #d63384;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Will you be my Valentine?</h1>
+        <div class="gif_container">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW5lenZyZHI5OXM2eW95b3pmMG40cWVrMDhtNjVuM3A4dGNxa2g2dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/VM1fcpu2bKs1e2Kdbj/giphy.gif" alt="Cute GIF">
+        </div>
+        <div class="buttons">
+            <button class="yes-button" onclick="handleYesClick()">Yes</button>
+            <button class="no-button" id="noButton" onmouseover="moveNoButton()">No</button>
+        </div>
+        <div class="message" id="sadMessage"></div>
+        <div class="message hidden" id="yesMessage">I knew you would say yes! 💖</div>
+    </div>
+
+    <script>
+        const sadMessages = [
+            "You are making me sad now... 😢",
+            "Why won't you say yes? 💔",
+            "I'm losing hope... 🥺",
+            "Please don't say no again... 😞",
+            "Every time you move away, my heart breaks a little more... 💔",
+            "Am I not good enough? 😭",
+            "You’re making this hard for me... 🥹"
+        ];
+        let messageIndex = 0;
+        let moveAmount = 20;
+
+        function handleYesClick() {
+            document.getElementById("yesMessage").classList.remove("hidden");
+            document.getElementById("sadMessage").classList.add("hidden");
+        }
+
+        function moveNoButton() {
+            let noButton = document.getElementById("noButton");
+            let currentLeft = parseInt(noButton.style.left) || 100;
+            let currentTop = parseInt(noButton.style.top) || 0;
+
+            let newLeft = currentLeft + (Math.random() > 0.5 ? moveAmount : -moveAmount);
+            let newTop = currentTop + (Math.random() > 0.5 ? moveAmount : -moveAmount);
+
+            noButton.style.left = `${newLeft}px`;
+            noButton.style.top = `${newTop}px`;
+
+            let sadMessageElement = document.getElementById("sadMessage");
+            sadMessageElement.innerText = sadMessages[messageIndex];
+            sadMessageElement.classList.remove("hidden");
+            messageIndex = (messageIndex + 1) % sadMessages.length;
+        }
+    </script>
+
+</body>
+</html>
